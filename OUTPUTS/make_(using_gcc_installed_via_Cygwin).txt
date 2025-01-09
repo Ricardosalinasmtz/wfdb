@@ -1,0 +1,52 @@
+	make WFDBROOT=`pwd`/build LIBDIR=`pwd`/build/lib install
+	make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0'
+	cd lib;      make clean; make install
+	make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+	make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make clean          # force recompilation since config may have changed
+	make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+	make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make all
+	make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make setup
+	make[4]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	sed "s+DBDIR+/home/ricas/Projects/wfdb-10.7.0/build/database+" <wfdblib.h0 >wfdblib.h
+	make[4]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make wfdbinit.o annot.o signal.o calib.o wfdbio.o
+	make[4]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/home/ricas/Projects/wfdb-10.7.0/build/include   -c -o wfdbinit.o wfdbinit.c
+	gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/home/ricas/Projects/wfdb-10.7.0/build/include   -c -o annot.o annot.c
+	gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/home/ricas/Projects/wfdb-10.7.0/build/include   -c -o signal.o signal.c
+	gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/home/ricas/Projects/wfdb-10.7.0/build/include   -c -o calib.o calib.c
+	lf='"-L/home/ricas/Projects/wfdb-10.7.0/build/lib -lwfdb"' ; \
+	lf=`echo "$lf" | sed 's|/home/ricas/Projects/wfdb-10.7.0/build/lib|/home/ricas/Projects/wfdb-10.7.0/build/lib|g'` ; \
+	gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/home/ricas/Projects/wfdb-10.7.0/build/include -DVERSION='"10.7.0"' -DCFLAGS='"-I/home/ricas/Projects/wfdb-10.7.0/build/include"' \
+	  -DLDFLAGS="$lf"  -c wfdbio.c
+	wfdbio.c: In function ‘www_get_cont_len’:
+	wfdbio.c:1546:5: warning: ‘CURLINFO_CONTENT_LENGTH_DOWNLOAD’ is deprecated: since 7.55.0. Use CURLINFO_CONTENT_LENGTH_DOWNLOAD_T [-Wdeprecated-declarations]
+	 1546 |     if (curl_easy_getinfo(curl_ua, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &length))
+	      |     ^~
+	In file included from wfdblib.h:222,
+	                 from wfdbio.c:159:
+	/usr/include/curl/curl.h:2897:3: note: declared here
+	 2897 |   CURLINFO_CONTENT_LENGTH_DOWNLOAD
+	      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	make[4]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	gcc -shared -o cygwfdb-10-7.dll -Wl,--out-implib=libwfdb.dll.a.10.7 -Wl,--export-all-symbols -Wl,--enable-auto-import wfdbinit.o annot.o signal.o calib.o wfdbio.o `curl-config --libs` `pkg-config --libs flac`
+	make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make /home/ricas/Projects/wfdb-10.7.0/build/include/wfdb/wfdb.h /home/ricas/Projects/wfdb-10.7.0/build/include/wfdb/wfdblib.h /home/ricas/Projects/wfdb-10.7.0/build/include/wfdb/ecgcodes.h /home/ricas/Projects/wfdb-10.7.0/build/include/wfdb/ecgmap.h /home/ricas/Projects/wfdb-10.7.0/build/lib
+	make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	../install.sh /home/ricas/Projects/wfdb-10.7.0/build/include/wfdb wfdb.h
+	../install.sh: line 4: $'\r': command not found
+	: invalid optionine 5: set: -
+	set: usage: set [-abefhkmnptuvxBCEHPT] [-o option-name] [--] [-] [arg ...]
+	make[3]: *** [Makefile:285: /home/ricas/Projects/wfdb-10.7.0/build/include/wfdb/wfdb.h] Error 2
+	make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make[2]: *** [Makefile:247: install] Error 2
+	make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+	make[1]: *** [Makefile:307: install] Error 2
+	make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0'
+	make: *** [Makefile:302: all] Error 2

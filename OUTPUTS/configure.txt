@@ -1,0 +1,75 @@
+		Checking the operating system type ...
+		Configuring the WFDB software package for cygwin.
+		Checking the echo command ...
+		Checking the package version number ... unknown
+		
+		Looking for the C compiler ... gcc
+		Looking for the command to strip debugging metadata ... strip
+		The WFDB software will be installed in '/usr/local'.
+		'.e manual pages will be installed in '/usr/local/man
+		
+		Looking for libcurl ... found
+		The WFDB software will be compiled with NETFILES access
+		using libcurl.
+		Looking for libFLAC ... found
+		The WFDB software will be compiled with support for
+		compressed signal files using libFLAC.
+		
+		Creating Makefile in lib ...
+		Creating Makefile in app ...
+		Creating Makefile in checkpkg ...
+		Creating Makefile in convert ...
+		Creating Makefile in data ...
+		Creating Makefile in doc ...
+		Creating Makefile in doc/wag-src ...
+		Creating Makefile in doc/wpg-src ...
+		Creating Makefile in doc/wug-src ...
+		Creating Makefile in examples ...
+		Creating Makefile in fortran ...
+		Creating Makefile in psd ...
+		Creating Makefile in wave ...
+		Creating Makefile in waverc ...
+		Creating Makefile in xml ...
+		Creating Makefile in . ...
+		rm conf/site.def conf/site-slib.def
+		
+		Looking for the XView libraries ... not found
+		WAVE will not be compiled, because the XView libraries do not
+		appear to be installed on this system.
+		To compile WAVE, install XView, add the directory containing the
+		XView textedit application to your PATH, and run ./configure again.
+		
+		IMPORTANT: You have chosen to build a dynamic (shared) WFDB library in
+		a directory, /usr/local/bin, that is not normally searched for such
+		libraries.  In order to use the applications that will be compiled
+		with this library, it may be necessary to add this directory to your
+		LD_LIBRARY_PATH.  If your shell is csh or a variant, do this by
+		typing:
+		  setenv LD_LIBRARY_PATH /usr/local/bin
+		Otherwise, do this by typing:
+		  LD_LIBRARY_PATH=/usr/local/bin
+		  export LD_LIBRARY_PATH
+		
+		Summary:
+		
+		wfdb-10.7.0-cygwin is now ready to be compiled using 'gcc'.
+		The WFDB library will be compiled as a dynamic library with NETFILES
+		 access via libcurl, and it will be installed in '/usr/local/bin'.
+		The WFDB library .h files will be installed in '/usr/local/include/wfdb'.
+		The WFDB applications will be linked to dynamic system libraries, and
+		 they will be installed in '/usr/local/bin'.
+		WAVE will not be compiled.
+		'.nual pages will be installed in subdirectories of '/usr/local/man
+		Sample data files will be installed in '/usr/local/database', which
+		 will be included in the default WFDB path.
+		
+		If you need to compile a different WFDB library type, or install into different
+		directories, rerun this script with its "-i" (interactive) option:
+		      ./configure -i
+		Other options can be viewed by rerunning this script with its "-h" option:
+		      ./configure -h
+		
+		WFDB software configuration is complete.
+		Now run 'make' to compile and test, followed by 'make install' to recompile
+		and install the software, man pages, and example data.  Finally, run
+		'make check' to verify that the installation is complete and successful.

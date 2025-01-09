@@ -1,0 +1,72 @@
+# echo 3
+# read rsmrsm
+cd lib;	     make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make clean	    # force recompilation since config may have changed
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make all
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make setup
+make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+sed "s+DBDIR+/usr/local/database+" <wfdblib.h0 >wfdblib.h
+make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make wfdbinit.o annot.o signal.o calib.o wfdbio.o
+make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o wfdbinit.o wfdbinit.c
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o annot.o annot.c
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o signal.o signal.c
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o calib.o calib.c
+lf='"-L/usr/local/bin -lwfdb"' ; \
+lf=`echo "$lf" | sed 's|/usr/local/bin|/usr/local/bin|g'` ; \
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -DVERSION='"10.7.0"' -DCFLAGS='"-I/usr/local/include"' \
+  -DLDFLAGS="$lf"  -c wfdbio.c
+make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+gcc -shared -o cygwfdb-10-7.dll -Wl,--out-implib=libwfdb.dll.a.10.7 -Wl,--export-all-symbols -Wl,--enable-auto-import wfdbinit.o annot.o signal.o calib.o wfdbio.o `curl-config --libs` `pkg-config --libs flac`
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make /usr/local/include/wfdb/wfdb.h /usr/local/include/wfdb/wfdblib.h /usr/local/include/wfdb/ecgcodes.h /usr/local/include/wfdb/ecgmap.h /usr/local/bin
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+mkdir -p /usr/local/include/wfdb; chmod 755 /usr/local/include/wfdb
+../install.sh /usr/local/include/wfdb wfdb.h
+chmod 644 /usr/local/include/wfdb/wfdb.h
+../install.sh /usr/local/include/wfdb wfdblib.h
+chmod 644 /usr/local/include/wfdb/wfdblib.h
+../install.sh /usr/local/include/wfdb ecgcodes.h
+chmod 644 /usr/local/include/wfdb/ecgcodes.h
+../install.sh /usr/local/include/wfdb ecgmap.h
+chmod 644 /usr/local/include/wfdb/ecgmap.h
+mkdir -p /usr/local/bin; chmod 755 /usr/local/bin
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+../install.sh /usr/local/bin libwfdb.dll.a.10.7
+chmod 755 /usr/local/bin/libwfdb.dll.a.10.7
+make lib-post-install 2>/dev/null
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+# read rsmrsm
+cd /usr/local/bin; ln -sf libwfdb.dll.a.10.7 libwfdb.dll.a
+cd /usr/local/bin; ln -sf libwfdb.dll.a.10.7 libwfdb.dll.a.10
+test -d /usr/local/bin || \
+ ( mkdir -p /usr/local/bin; \
+   chmod 755 /usr/local/bin )
+test /usr/bin = /usr/local/bin || \
+ ( ../install.sh /usr/local/bin /usr/bin/cygwin1.dll; \
+   ../install.sh /usr/local/bin /usr/bin/cygz.dll )
+../install.sh /usr/local/bin cygwfdb-10-7.dll
+cd /usr/local/bin; chmod 755 *.dll
+test /usr/local/bin != /usr/local/bin || \
+ ( mkdir /usr/local/lib; \
+   ln -sf /usr/local/bin/libwfdb.dll.a /usr/local/lib )
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+# echo 4
+# read rsmrsm
+cd app;      make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/app'
+rm -f ann2rr.exe bxb.exe calsig.exe ecgeval.exe epicmp.exe fir.exe gqfuse.exe gqpost.exe gqrs.exe hrstats.exe ihr.exe mfilt.exe mrgann.exe mxm.exe nguess.exe nst.exe plotstm.exe pscgen.exe pschart.exe psfd.exe rdann.exe rdsamp.exe rr2ann.exe rxr.exe sampfreq.exe sigamp.exe sigavg.exe signame.exe signum.exe skewedit.exe snip.exe sortann.exe sqrs.exe sqrs125.exe stepdet.exe sumann.exe sumstats.exe tach.exe time2sec.exe wabp.exe wfdb-config.exe wfdbcat.exe wfdbcollate.exe wfdbdesc.exe wfdbmap.exe wfdbsignals.exe wfdbtime.exe wfdbwhich.exe wqrs.exe wrann.exe wrsamp.exe xform.exe *.o *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/app'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/app'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include ann2rr.c -o ann2rr.exe -L/usr/local/bin -lwfdb
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/app'

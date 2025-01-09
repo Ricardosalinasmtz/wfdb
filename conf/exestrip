@@ -1,6 +1,12 @@
 #!/bin/sh
 
+#for FILE in $*
+#do
+#   strip $FILE.exe
+#done
+
+#rsmrsm
 for FILE in $*
 do
-   strip $FILE.exe
+   strip $FILE
 done

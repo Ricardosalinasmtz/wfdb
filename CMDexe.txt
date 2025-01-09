@@ -1,0 +1,55 @@
+# READ ME
+# for make all, run .exe in checkpkg
+# for make check (after make install), run .exe in /usr/local/bin
+#  # and & :: stands for comments
+#-------------
+# starting from C:/Users/ricas>
+cd ../../cygwin64/home/ricas/Projects/wfdb-10.7.0/checkpkg
+
+
+lcheck.exe -v>lcheck.log
+
+# cd ../build/bin NOT NEEDED BECAUSE BUILD/BIN IS IN THE PATH
+wfdbwhich.exe 100s.atr >wfdbwhich.out 2>&1
+wfdbcat.exe 100s.atr >wfdbcat.out 2>&1
+
+rdann.exe -r 100s -a atr >rdann.out
+wrann.exe -r 100s -a wra <wrann.in
+rdsamp.exe -r 100s -f 10 -t 11 -p -v >rdsamp.out
+wrsamp.exe -o 100w -F 360 -O 212 -x 200 1 2 <wrsamp.in
+ann2rr.exe -r 100s -a atr >ann2rr.out
+rr2ann.exe -r 100s -a a2r <rr2ann.in
+sqrs.exe -r 100s 2>sqrs.log
+ecgeval.exe <input/ecgeval >ecgeval.out 2>&1 & :: THIS ONE GAVE 2 ERRORS. grep: qrs-mit.bat: No such file or directory and qrs-mit.out: No such file or directory
+bxb.exe -r 100s -a atr ann -f 0 >bxb.out 2>bxb.err
+rxr.exe -r 100s -a atr ann -f 0 >rxr.out 2>rxr.err
+fir.exe -i 100s -n fir -f 10 -t 15 -c -1 1
+ihr.exe -r 100s -a atr >ihr.out
+mfilt.exe -l 5 -i 100s -n mfilt -f 10 -t 15 2>mfilt.log
+mrgann.exe -r 100s -i qrs wqrs -o mrg -m0 10 -m1 20 -m2 30 -m3 40
+nguess.exe -r 100a -a atr & :: THE FILE IS SAVED IN BUILD/BIN, MOVE IT TO CHECKPKG
+pschart.exe -a atr -c "" -g -l -T Test - >pschart.ps <<EOF 100s 10-15
+EOF & :: this faile because << was not recognized in cmd
+psfd.exe -a atr -c "" -g -l -T Test - >psfd.ps <<EOF 100s 0-e
+EOF & :: this faile because << was not recognized in cmd
+sampfreq.exe 100s >sampfreq.out
+sigamp.exe -r 100s -a atr >sigamp.out
+sigavg.exe -r 100s -a atr -v>100s.sigavg
+snip.exe -i 100s -n snip -a atr -f 10 -t 15
+
+rdann.exe -r 100s -a atr -f 30 >foo #RUN TOGHETHER WITH NEXT ONE
+rdann.exe -r 100s -a atr -t 30 >>foo
+
+wrann.exe -r 100s -a mix <foo 2>wrann.log # This is not ran because is inside parenthesis
+sortann.exe -r 100s -a mix
+
+sumann.exe -r 100s -a atr >sumann.out
+sumstats.exe input/sumstats >sumstats.out #This one gave error. maybe dos2unix to input/sumstats?
+tach.exe -r 100s -a atr >tach.out
+wfdbcollate.exe -s 100s -o wfd -l 30 2>wfdbcollate.log
+wfdbdesc.exe 100s >wfdbdesc.out
+wabp.exe -r xform 2>wabp.log
+wqrs.exe -r 100s -j 2>wqrs.log
+parsescp.exe -o test -w <input/test.scp
+xform.exe -i 100s -a atr -n 100x -o input/100x >xform-1.out 2>&1
+xform.exe -i $rec -s 1 2 0 3 -a all -M -n xform -f 9:19:45 \

@@ -14,7 +14,7 @@
 #
 # Suggestions for additional checks are welcome;  please send them to the
 # author (wfdb@physionet.org).
-
+set -x #rsmrsm
 cp -pr ../data .
 
 if [ \! -s ../data/100s.hea ]
@@ -77,10 +77,17 @@ export LD_LIBRARY_PATH
 test -s Makefile || ( cd ..; ./configure )
 test -s lcheck || test -s lcheck.exe || make lcheck
 if test -s lcheck.exe; then LCHECK=./lcheck.exe; else LCHECK=./lcheck; fi
+rm -f lcheck.log #rsmrsm
 $LCHECK -v >lcheck.log
+#set -x #rsmrsm
+echo "run lcheck.exe -v >lcheck.log via cmd" #rsmrsm
+read rsmrsm
+#set +x #rsmrsm
+
 cp ../data/100s.atr expected/100s.chk
 cp ../data/100s.dat expected/100z.dat
 CF="lcheck.log lcheck_cal 100s.chk 100z.dat 100z.hea"
+
 if grep "WFDB supports NETFILES" lcheck.log >/dev/null 2>&1
 then
   CF="$CF udb/100s.chk udb/100z.dat udb/100z.hea"
@@ -113,10 +120,11 @@ do
 	FAIL=`expr $FAIL + 1`
     fi
     TESTS=`expr $TESTS + 1`
+    # read rsmrsm
 done
 
 rm -rf data 100y.*
-
+set -x #rsmrsm
 if [ $PASS = $TESTS ]
 then
     echo "`basename $0`: all $TESTS tests passed."
@@ -128,7 +136,7 @@ else
 	echo "`basename $0`: $PASS of $TESTS tests passed, $FAIL tests failed."
     fi
 fi
-
+set +x #rsmrsm
 # rmdir will fail if 'udb' is not empty.  This is a *feature*, not a bug --
 # don't fix it!
 test -d udb && rmdir udb

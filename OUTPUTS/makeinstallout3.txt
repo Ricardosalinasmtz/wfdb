@@ -1,0 +1,303 @@
+# echo 3
+# read rsmrsm
+cd lib;	     make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make clean	    # force recompilation since config may have changed
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make all
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make setup
+make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+sed "s+DBDIR+/usr/local/database+" <wfdblib.h0 >wfdblib.h
+make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make wfdbinit.o annot.o signal.o calib.o wfdbio.o
+make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o wfdbinit.o wfdbinit.c
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o annot.o annot.c
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o signal.o signal.c
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o calib.o calib.c
+lf='"-L/usr/local/bin -lwfdb"' ; \
+lf=`echo "$lf" | sed 's|/usr/local/bin|/usr/local/bin|g'` ; \
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -DVERSION='"10.7.0"' -DCFLAGS='"-I/usr/local/include"' \
+  -DLDFLAGS="$lf"  -c wfdbio.c
+make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+gcc -shared -o cygwfdb-10-7.dll -Wl,--out-implib=libwfdb.dll.a.10.7 -Wl,--export-all-symbols -Wl,--enable-auto-import wfdbinit.o annot.o signal.o calib.o wfdbio.o `curl-config --libs` `pkg-config --libs flac`
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make /usr/local/include/wfdb/wfdb.h /usr/local/include/wfdb/wfdblib.h /usr/local/include/wfdb/ecgcodes.h /usr/local/include/wfdb/ecgmap.h /usr/local/bin
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+../install.sh /usr/local/include/wfdb wfdb.h
+chmod 644 /usr/local/include/wfdb/wfdb.h
+../install.sh /usr/local/include/wfdb wfdblib.h
+chmod 644 /usr/local/include/wfdb/wfdblib.h
+../install.sh /usr/local/include/wfdb ecgcodes.h
+chmod 644 /usr/local/include/wfdb/ecgcodes.h
+../install.sh /usr/local/include/wfdb ecgmap.h
+chmod 644 /usr/local/include/wfdb/ecgmap.h
+make[2]: '/usr/local/bin' is up to date.
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+../install.sh /usr/local/bin libwfdb.dll.a.10.7
+chmod 755 /usr/local/bin/libwfdb.dll.a.10.7
+make lib-post-install 2>/dev/null
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+# read rsmrsm
+cd /usr/local/bin; ln -sf libwfdb.dll.a.10.7 libwfdb.dll.a
+cd /usr/local/bin; ln -sf libwfdb.dll.a.10.7 libwfdb.dll.a.10
+test -d /usr/local/bin || \
+ ( mkdir -p /usr/local/bin; \
+   chmod 755 /usr/local/bin )
+test /usr/bin = /usr/local/bin || \
+ ( ../install.sh /usr/local/bin /usr/bin/cygwin1.dll; \
+   ../install.sh /usr/local/bin /usr/bin/cygz.dll )
+../install.sh /usr/local/bin cygwfdb-10-7.dll
+cd /usr/local/bin; chmod 755 *.dll
+test /usr/local/bin != /usr/local/bin || \
+ ( mkdir /usr/local/lib; \
+   ln -sf /usr/local/bin/libwfdb.dll.a /usr/local/lib )
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+# echo 4
+read rsmrsm
+cd app;      make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/app'
+rm -f ann2rr.exe bxb.exe calsig.exe ecgeval.exe epicmp.exe fir.exe gqfuse.exe gqpost.exe gqrs.exe hrstats.exe ihr.exe mfilt.exe mrgann.exe mxm.exe nguess.exe nst.exe plotstm.exe pscgen.exe pschart.exe psfd.exe rdann.exe rdsamp.exe rr2ann.exe rxr.exe sampfreq.exe sigamp.exe sigavg.exe signame.exe signum.exe skewedit.exe snip.exe sortann.exe sqrs.exe sqrs125.exe stepdet.exe sumann.exe sumstats.exe tach.exe time2sec.exe wabp.exe wfdb-config.exe wfdbcat.exe wfdbcollate.exe wfdbdesc.exe wfdbmap.exe wfdbsignals.exe wfdbtime.exe wfdbwhich.exe wqrs.exe wrann.exe wrsamp.exe xform.exe *.o *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/app'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/app'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include ann2rr.c -o ann2rr.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include bxb.c -o bxb.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include calsig.c -o calsig.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include ecgeval.c -o ecgeval.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include epicmp.c -o epicmp.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include fir.c -o fir.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include gqfuse.c -o gqfuse.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include gqpost.c -o gqpost.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include gqrs.c -o gqrs.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include hrstats.c -o hrstats.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include ihr.c -o ihr.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include mfilt.c -o mfilt.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include mrgann.c -o mrgann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include mxm.c -o mxm.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include nguess.c -o nguess.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include nst.c -o nst.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include plotstm.c -o plotstm.exe
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include pscgen.c -o pscgen.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -DPROLOG=\"/usr/local/lib/ps/pschart.pro\" pschart.c -o pschart.exe \
+          -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -DPROLOG=\"/usr/local/lib/ps/psfd.pro\" psfd.c -o psfd.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include rdann.c -o rdann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include rdsamp.c -o rdsamp.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include rr2ann.c -o rr2ann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include rxr.c -o rxr.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sampfreq.c -o sampfreq.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sigamp.c -o sigamp.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sigavg.c -o sigavg.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include signame.c -o signame.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include signum.c -o signum.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include skewedit.c -o skewedit.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include snip.c -o snip.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sortann.c -o sortann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sqrs.c -o sqrs.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sqrs125.c -o sqrs125.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include stepdet.c -o stepdet.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sumann.c -o sumann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include sumstats.c -o sumstats.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include tach.c -o tach.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include time2sec.c -o time2sec.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wabp.c -o wabp.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdb-config.c -o wfdb-config.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbcat.c -o wfdbcat.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbcollate.c -o wfdbcollate.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbdesc.c -o wfdbdesc.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbmap.c -o wfdbmap.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbsignals.c -o wfdbsignals.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbtime.c -o wfdbtime.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdbwhich.c -o wfdbwhich.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wqrs.c -o wqrs.exe -L/usr/local/bin -lwfdb -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wrann.c -o wrann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wrsamp.c -o wrsamp.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include xform.c -o xform.exe -L/usr/local/bin -lwfdb
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exestrip ann2rr.exe bxb.exe calsig.exe ecgeval.exe epicmp.exe fir.exe gqfuse.exe gqpost.exe gqrs.exe hrstats.exe ihr.exe mfilt.exe mrgann.exe mxm.exe nguess.exe nst.exe plotstm.exe pscgen.exe pschart.exe psfd.exe rdann.exe rdsamp.exe rr2ann.exe rxr.exe sampfreq.exe sigamp.exe sigavg.exe signame.exe signum.exe skewedit.exe snip.exe sortann.exe sqrs.exe sqrs125.exe stepdet.exe sumann.exe sumstats.exe tach.exe time2sec.exe wabp.exe wfdb-config.exe wfdbcat.exe wfdbcollate.exe wfdbdesc.exe wfdbmap.exe wfdbsignals.exe wfdbtime.exe wfdbwhich.exe wqrs.exe wrann.exe wrsamp.exe xform.exe
+mkdir -p /usr/local/lib/ps
+chmod 755 /usr/local/lib/ps
+sed s+/usr/local/database+/usr/local/database+g <setwfdb >/usr/local/bin/setwfdb
+sed s+/usr/local/database+/usr/local/database+g <cshsetwfdb >/usr/local/bin/cshsetwfdb
+sed s+/usr/local/database+/usr/local/database+g <pnwlogin >/usr/local/bin/pnwlogin
+cd /usr/local/bin; chmod 644 *setwfdb; "/home/ricas/Projects/wfdb-10.7.0"/conf/exechmod 755 pnwlogin
+rm -f pschart psfd pschart.exe psfd.exe
+make pschart.exe psfd.exe
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/app'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -DPROLOG=\"/usr/local/lib/ps/pschart.pro\" pschart.c -o pschart.exe \
+          -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -DPROLOG=\"/usr/local/lib/ps/psfd.pro\" psfd.c -o psfd.exe -L/usr/local/bin -lwfdb
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/app'
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exestrip pschart.exe psfd.exe
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exechmod 755 ann2rr.exe bxb.exe calsig.exe ecgeval.exe epicmp.exe fir.exe gqfuse.exe gqpost.exe gqrs.exe hrstats.exe ihr.exe mfilt.exe mrgann.exe mxm.exe nguess.exe nst.exe plotstm.exe pscgen.exe pschart.exe psfd.exe rdann.exe rdsamp.exe rr2ann.exe rxr.exe sampfreq.exe sigamp.exe sigavg.exe signame.exe signum.exe skewedit.exe snip.exe sortann.exe sqrs.exe sqrs125.exe stepdet.exe sumann.exe sumstats.exe tach.exe time2sec.exe wabp.exe wfdb-config.exe wfdbcat.exe wfdbcollate.exe wfdbdesc.exe wfdbmap.exe wfdbsignals.exe wfdbtime.exe wfdbwhich.exe wqrs.exe wrann.exe wrsamp.exe xform.exe
+../install.sh /usr/local/bin ann2rr.exe bxb.exe calsig.exe ecgeval.exe epicmp.exe fir.exe gqfuse.exe gqpost.exe gqrs.exe hrstats.exe ihr.exe mfilt.exe mrgann.exe mxm.exe nguess.exe nst.exe plotstm.exe pscgen.exe pschart.exe psfd.exe rdann.exe rdsamp.exe rr2ann.exe rxr.exe sampfreq.exe sigamp.exe sigavg.exe signame.exe signum.exe skewedit.exe snip.exe sortann.exe sqrs.exe sqrs125.exe stepdet.exe sumann.exe sumstats.exe tach.exe time2sec.exe wabp.exe wfdb-config.exe wfdbcat.exe wfdbcollate.exe wfdbdesc.exe wfdbmap.exe wfdbsignals.exe wfdbtime.exe wfdbwhich.exe wqrs.exe wrann.exe wrsamp.exe xform.exe
+cp pschart.pro psfd.pro 12lead.pro /usr/local/lib/ps
+cd /usr/local/lib/ps; chmod 644 pschart.pro psfd.pro 12lead.pro
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/app'
+# echo 5
+# read rsmrsm
+cd convert;  make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/convert'
+rm -f a2m.exe ad2m.exe ahaecg2mit.exe m2a.exe md2a.exe readid.exe makeid.exe edf2mit.exe mit2edf.exe parsescp.exe rdedfann.exe wav2mit.exe mit2wav.exe wfdb2mat.exe revise.exe *.o *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/convert'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/convert'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include a2m.c -o a2m.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include ad2m.c -o ad2m.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include ahaecg2mit.c -o ahaecg2mit.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include m2a.c -o m2a.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include md2a.c -o md2a.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include readid.c -o readid.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include makeid.c -o makeid.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include edf2mit.c -o edf2mit.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include mit2edf.c -o mit2edf.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include parsescp.c -o parsescp.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include rdedfann.c -o rdedfann.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wav2mit.c -o wav2mit.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include mit2wav.c -o mit2wav.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include wfdb2mat.c -o wfdb2mat.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include revise.c -o revise.exe -L/usr/local/bin -lwfdb
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exestrip a2m.exe ad2m.exe ahaecg2mit.exe m2a.exe md2a.exe readid.exe makeid.exe edf2mit.exe mit2edf.exe parsescp.exe rdedfann.exe wav2mit.exe mit2wav.exe wfdb2mat.exe revise.exe
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exechmod 755 a2m.exe ad2m.exe ahaecg2mit.exe m2a.exe md2a.exe readid.exe makeid.exe edf2mit.exe mit2edf.exe parsescp.exe rdedfann.exe wav2mit.exe mit2wav.exe wfdb2mat.exe revise.exe ahaconvert
+../install.sh /usr/local/bin a2m.exe ad2m.exe ahaecg2mit.exe m2a.exe md2a.exe readid.exe makeid.exe edf2mit.exe mit2edf.exe parsescp.exe rdedfann.exe wav2mit.exe mit2wav.exe wfdb2mat.exe revise.exe ahaconvert
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/convert'
+# echo 6
+# read rsmrsm
+cd data;     make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/data'
+rm -f *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/data'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/data'
+mkdir -p /usr/local/database
+chmod 755 /usr/local/database
+mkdir -p /usr/local/database/pipe
+chmod 755 /usr/local/database/pipe
+mkdir -p /usr/local/database/tape
+chmod 755 /usr/local/database/tape
+cp 100a.atr 100s.atr 100s.dat *.hea *list wfdbcal /usr/local/database
+cp pipe/* /usr/local/database/pipe
+cp tape/* /usr/local/database/tape
+cd /usr/local/database; chmod 644 100a.atr 100s.atr 100s.dat *.hea *list wfdbcal
+cd /usr/local/database; ln -sf wfdbcal dbcal
+cd /usr/local/database/pipe; chmod 644 *
+cd /usr/local/database/tape; chmod 644 *
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/data'
+# echo 7
+# read rsmrsm
+cd fortran;  make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/fortran'
+rm -f example.exe example.c *.o *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/fortran'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/fortran'
+../install.sh /usr/local/include/wfdb wfdbf.c
+chmod 644 /usr/local/include/wfdb/wfdbf.c
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/fortran'
+# echo 8
+# read rsmrsm
+cd psd;      make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/psd'
+rm -f *.o *~ coherence.exe fft.exe log10.exe lomb.exe memse.exe
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/psd'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/psd'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -o coherence.exe -O coherence.c -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -o fft.exe -O fft.c -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -o log10.exe -O log10.c -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -o lomb.exe -O lomb.c -lm
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include -o memse.exe -O memse.c -lm
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exestrip coherence.exe fft.exe log10.exe lomb.exe memse.exe
+sed s+BINDIR+/usr/local/bin+g <hrfft >/usr/local/bin/hrfft
+sed s+BINDIR+/usr/local/bin+g <hrlomb >/usr/local/bin/hrlomb
+sed s+BINDIR+/usr/local/bin+g <hrmem >/usr/local/bin/hrmem
+sed s+BINDIR+/usr/local/bin+g <hrplot >/usr/local/bin/hrplot
+cp plot2d plot3d /usr/local/bin
+cd /usr/local/bin; "/home/ricas/Projects/wfdb-10.7.0"/conf/exechmod 755 hrfft hrlomb hrmem hrplot plot2d plot3d
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exechmod 755 coherence.exe fft.exe log10.exe lomb.exe memse.exe
+../install.sh /usr/local/bin coherence.exe fft.exe log10.exe lomb.exe memse.exe
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/psd'
+# echo 9
+# read rsmrsm
+cd wave;     make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/wave'
+rm -f soelim wave wave-static *.o *~ wave.hlp news.hlp
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/wave'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/wave'
+Skipping installation of WAVE (XView required).
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/wave'
+# echo 10
+# read rsmrsm
+cd waverc;   make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/waverc'
+rm -f soelim wave wave-static *.o *~ wave.hlp news.hlp
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/waverc'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/waverc'
+Skipping installation of WAVE (XView required).
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/waverc'
+# echo 11
+# read rsmrsm
+( cd xml;   make clean; make install )
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/xml'
+rm -f annxml.exe heaxml.exe xmlann.exe xmlhea.exe *.o *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/xml'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/xml'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include annxml.c -o annxml.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include heaxml.c -o heaxml.exe -L/usr/local/bin -lwfdb
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include xmlann.c -o xmlann.exe -L/usr/local/bin -lwfdb -lexpat
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include xmlhea.c -o xmlhea.exe -L/usr/local/bin -lwfdb -lexpat
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exestrip annxml.exe heaxml.exe xmlann.exe xmlhea.exe
+"/home/ricas/Projects/wfdb-10.7.0"/conf/exechmod 755 annxml.exe heaxml.exe xmlann.exe xmlhea.exe
+../install.sh /usr/local/bin annxml.exe heaxml.exe xmlann.exe xmlhea.exe
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/xml'
+# echo 12
+# read rsmrsm
+test -d doc && ( cd doc; make clean; make install )
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/doc'
+cd wag-src; make clean
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/doc/wag-src'
+rm -f *.aux *.dvi *.log *.ps *.toc intro.htm faq.htm wag*pdf wagcover \
+      eval.tex install.tex wag[1234].tex *~
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/doc/wag-src'
+cd wpg-src; make clean
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/doc/wpg-src'
+rm -f info.tar.gz wpg wpg-* wpg.aux wpg.cp wpg.cps wpg.dvi wpg.fn \
+ wpg.fns wpg.ilg wpg.ky wpg.log wpg.pdf wpg.ps wpg.pg wpg.tex wpg.toc \
+ wpg.tp wpg.vr wpgcover wpgcover.ps *~ ../wpg/info/dir
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/doc/wpg-src'
+cd wug-src; make clean
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/doc/wug-src'
+wave/scripts/wugfigures -clean	# remove figures from this directory
+rm -rf internals.pl labels.pl wug.aux wug.dvi wug.html wug.idx \
+ wug.ilg wug.ind wug.log wug.out wug.pdf wug.ps wug.toc wug.tex \
+         .xvpics wugcover* *~
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/doc/wug-src'
+rm -f index.htm index.html wag/* wpg/*.htm* wpg/*.pdf wpg/*.ps wpg/info/w* wug/* *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/doc'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/doc'
+cd wag-src; make wag.man
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/doc/wag-src'
+test -d /usr/local/man/man1 || ( mkdir -p /usr/local/man/man1; chmod 755 /usr/local/man/man1 )
+test -d /usr/local/man/man3 || ( mkdir -p /usr/local/man/man3; chmod 755 /usr/local/man/man3 )
+test -d /usr/local/man/man5 || ( mkdir -p /usr/local/man/man5; chmod 755 /usr/local/man/man5 )
+test -d /usr/local/man/man7 || ( mkdir -p /usr/local/man/man7; chmod 755 /usr/local/man/man7 )
+./maninst.sh /usr/local/man/man1 /usr/local/man/man3 /usr/local/man/man5 /usr/local/man/man7 "chmod 644"
+cd /usr/local/man/man1; ln -sf a2m.1 ad2m.1
+cd /usr/local/man/man1; ln -sf a2m.1 ahaconvert.1
+cd /usr/local/man/man1; ln -sf a2m.1 ahaecg2mit.1
+cd /usr/local/man/man1; ln -sf a2m.1 m2a.1
+cd /usr/local/man/man1; ln -sf a2m.1 md2a.1
+cd /usr/local/man/man1; ln -sf ann2rr.1 rr2ann.1
+cd /usr/local/man/man1; ln -sf edf2mit.1 mit2edf.1
+cd /usr/local/man/man1; ln -sf gqrs.1 gqpost.1
+cd /usr/local/man/man1; ln -sf hrfft.1 hrlomb.1
+cd /usr/local/man/man1; ln -sf hrfft.1 hrmem.1
+cd /usr/local/man/man1; ln -sf hrfft.1 hrplot.1
+cd /usr/local/man/man1; ln -sf plot2d.1 plot3d.1
+cd /usr/local/man/man1; ln -sf pnnlist.1 pNNx.1
+cd /usr/local/man/man1; ln -sf setwfdb.1 cshsetwfdb.1
+cd /usr/local/man/man1; ln -sf wav2mit.1 mit2wav.1
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/doc/wag-src'
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/doc'

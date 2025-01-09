@@ -1,0 +1,23 @@
+# echo 3
+# read rsmrsm
+cd lib;	     make clean; make install
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[1]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make clean	    # force recompilation since config may have changed
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+rm -f wfdbinit.o annot.o signal.o calib.o wfdbio.o libwfdb.* *.dll *~
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make all
+make[2]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make setup
+make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+sed "s+DBDIR+/usr/local/database+" <wfdblib.h0 >wfdblib.h
+make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make wfdbinit.o annot.o signal.o calib.o wfdbio.o
+make[3]: Entering directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+gcc -Wno-implicit -Wformat  -g -O -DWFDB_FLAC_SUPPORT -DWFDB_MAJOR=10 -DWFDB_MINOR=7 -DWFDB_RELEASE=0 -DWFDB_LARGETIME -DNOVALUES_H `curl-config --cflags` `pkg-config --cflags flac` -I/usr/local/include   -c -o wfdbinit.o wfdbinit.c
+make[3]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[2]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
+make[1]: Leaving directory '/home/ricas/Projects/wfdb-10.7.0/lib'
